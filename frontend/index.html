@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PDF ↔️ Image ↔ OCR</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="card">
+    <h1>PDF → JPG • OCR • JPG → PNG</h1>
+
+    <label>Choose file:
+      <input id="fileInput" type="file" />
+    </label>
+
+    <div class="buttons">
+      <button id="pdfToJpgBtn">PDF → JPG</button>
+      <button id="ocrBtn">Extract Text (OCR)</button>
+      <button id="jpgToPngBtn">JPG → PNG</button>
+    </div>
+
+    <div id="results">
+      <pre id="output"></pre>
+      <div id="images"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

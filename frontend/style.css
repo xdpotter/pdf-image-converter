@@ -1,0 +1,7 @@
+body { font-family: Arial, sans-serif; background:#f5f7fb; color:#222; display:flex; min-height:100vh; align-items:center; justify-content:center; margin:0;}
+.card { background: white; padding:20px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); width:420px; max-width:95%;}
+h1 { font-size:18px; margin:0 0 12px 0;}
+label { display:block; margin-bottom:12px;}
+.buttons button { margin-right:8px; padding:8px 10px; border-radius:6px; border:1px solid #ddd; background:#f0f4ff; cursor:pointer;}
+#images img { max-width:100%; margin-top:8px; display:block; }
+#output { background:#f7f9fc; padding:8px; border-radius:6px; max-height:200px; overflow:auto;}
