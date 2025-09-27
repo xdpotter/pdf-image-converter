@@ -1,7 +1,175 @@
-body { font-family: Arial, sans-serif; background:#f5f7fb; color:#222; display:flex; min-height:100vh; align-items:center; justify-content:center; margin:0;}
-.card { background: white; padding:20px; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.08); width:420px; max-width:95%;}
-h1 { font-size:18px; margin:0 0 12px 0;}
-label { display:block; margin-bottom:12px;}
-.buttons button { margin-right:8px; padding:8px 10px; border-radius:6px; border:1px solid #ddd; background:#f0f4ff; cursor:pointer;}
-#images img { max-width:100%; margin-top:8px; display:block; }
-#output { background:#f7f9fc; padding:8px; border-radius:6px; max-height:200px; overflow:auto;}
+:root {
+  /* Define a modern color palette */
+  --primary-color: #007bff; /* Blue for primary actions */
+  --secondary-color: #6c757d; /* Grey for less critical actions */
+  --tertiary-color: #28a745; /* Green for success/image actions */
+  --background-light: #f8f9fa;
+  --background-white: #ffffff;
+  --text-dark: #212529;
+  --border-color: #dee2e6;
+  --shadow-light: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+}
+
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--background-light);
+  color: var(--text-dark);
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Card Container */
+.card {
+  background: var(--background-white);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow-light);
+  width: 500px; /* Slightly wider */
+  max-width: 95%;
+  border-top: 5px solid var(--primary-color); /* A subtle brand accent */
+}
+
+/* Headings and Text */
+h1 {
+  font-size: 24px;
+  margin: 0 0 5px 0;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.description {
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+    font-size: 15px;
+}
+
+/* Input Section */
+.input-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.file-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+#fileInput {
+  display: block; /* Make the input take full width */
+  margin-top: 5px;
+  padding: 10px 0; /* Add some padding to the area around the input */
+  width: 100%;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  gap: 10px; /* Space between buttons */
+  margin-bottom: 20px;
+}
+
+.action-btn {
+  flex: 1; /* Make buttons flexible */
+  min-width: 120px; /* Ensure a minimum size */
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn .icon {
+    margin-right: 6px;
+    font-size: 1.1em;
+}
+
+/* Primary Button Style */
+#pdfToJpgBtn, .action-btn {
+  background: var(--primary-color);
+  color: white;
+}
+#pdfToJpgBtn:hover, .action-btn:hover {
+  background: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* Secondary Button Style */
+.secondary-btn {
+  background: var(--secondary-color);
+  color: white;
+}
+.secondary-btn:hover {
+  background: #5a6268;
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+/* Tertiary Button Style (used for JPG -> PNG) */
+.tertiary-btn {
+  background: var(--tertiary-color);
+  color: white;
+}
+.tertiary-btn:hover {
+  background: #1e7e34;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+
+/* Results Area */
+.results-container {
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+#output {
+  background: var(--background-white);
+  border: 1px solid var(--border-color);
+  padding: 15px;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow: auto;
+  font-size: 13px;
+  white-space: pre-wrap; /* Better handling of long JSON output */
+  word-break: break-all;
+  color: #333;
+}
+
+#images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+#images img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* The inline styles from script.js will override the margin/max-width for individual images */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+    .action-btn {
+        min-width: 100%;
+    }
+}
