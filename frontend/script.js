@@ -1,7 +1,9 @@
-// Replace this with your deployed backend URL later
-const BACKEND = "https://REPLACE_WITH_BACKEND_URL"; 
+// Use your deployed backend URL
+const BACKEND = "https://pdf-image-converter-1.onrender.com";
 
-function qs(id){ return document.getElementById(id); }
+function qs(id) {
+  return document.getElementById(id);
+}
 
 async function uploadTo(endpoint) {
   const fileInput = qs("fileInput");
@@ -12,6 +14,7 @@ async function uploadTo(endpoint) {
 
   if (!fileInput.files || fileInput.files.length === 0) {
     alert("Please choose a file first");
+    out.textContent = "";
     return;
   }
 
@@ -19,24 +22,36 @@ async function uploadTo(endpoint) {
   fd.append("file", fileInput.files[0]);
 
   try {
-    const res = await fetch(BACKEND + endpoint, { method: "POST", body: fd });
+    const res = await fetch(BACKEND + endpoint, {
+      method: "POST",
+      body: fd
+    });
+
     const data = await res.json();
+
     if (!res.ok) {
       out.textContent = "Error: " + JSON.stringify(data, null, 2);
       return;
     }
+
     out.textContent = JSON.stringify(data, null, 2);
 
+    // Display images if returned
     if (data.images) {
       data.images.forEach(rel => {
         const img = document.createElement("img");
         img.src = BACKEND + rel;
+        img.style.maxWidth = "300px";
+        img.style.margin = "5px";
         imagesDiv.appendChild(img);
       });
     }
+
     if (data.png_url) {
       const img = document.createElement("img");
       img.src = BACKEND + data.png_url;
+      img.style.maxWidth = "300px";
+      img.style.margin = "5px";
       imagesDiv.appendChild(img);
     }
   } catch (err) {
@@ -44,6 +59,7 @@ async function uploadTo(endpoint) {
   }
 }
 
+// Button event listeners
 qs("pdfToJpgBtn").addEventListener("click", () => uploadTo("/pdf-to-jpg"));
 qs("ocrBtn").addEventListener("click", () => uploadTo("/ocr"));
 qs("jpgToPngBtn").addEventListener("click", () => uploadTo("/jpg-to-png"));
